@@ -1,0 +1,151 @@
+busybox microcom -t 15000 -s 115200 /dev/tty
+
+
+查看某次提交修改的文件
+git show (commit)
+git show 提交的版本号
+
+git查看主机名和网址
+git remote -v
+
+git查看所有分支名
+git branch -a
+
+git查看当前分支名
+git branch
+
+git下载并切换到分支
+1\git checkout -b branch_name origin/branch_name
+2\git checkout branch_name
+git branch -d 分支名 //删除分支
+git branch -D //强制删除
+
+git clone 代码
+git clone server96@192.168.0.96:/homerver96/SELEX/HS200_Src/pumat4-2.1
+
+git pull
+git push
+
+git上传修改到分支
+git add 修改代码
+git commit -m '修改信息'
+git show 查看提交的修改信息
+git show  修改ID （查看修改的内容）
+git push 提交
+git push origin HEAD:master_triones
+git push origin HEAD:pumat4-2.1-smalldisp_triones
+
+
+更新本地代码：
+git fetch orgin
+git diff test（本地分支） origin/xxx（远程分支）
+git merge origin/xxxx  /* (xxxx 为分支名称) */
+
+
+使用git创建自己的仓库：
+git init //初始化当前目录为版本库
+git init  xxx //指定xxx目录为版本库
+ git init执行后，在目录下生成.git
+此时生成的版本库为空，需要在版本库中，执行
+git add  ，git commit
+添加相关文件
+
+之后，就可以远程通过git clone xxx，下载相关代码
+
+git log -p 目录/查看某个目录下的提交记录
+git log //查看所有目录的提交记录
+git log --online 简化为一行信息的提交记录
+git log --author=xx 指定某个提交者的信息进行显示
+git log --grep=xx  //指定查找的xx的提交记录
+
+
+git status //上次提交后，查看是否有修改，具体到文件修改，显示修改文件及新添加文件
+提交代码时，使用status比diff相比，会显示新增文件。应该使用git status
+
+git diff （本地和缓冲区） //比较本地代码与缓存区代码（git add添加，未commit提交）的差异；如果未git add ，就是比较
+本地代码与上次提交代码的差异，但无法显示新添加文件异同
+
+git diff --cached （缓冲区和提交） //比较缓存区和上次提交代码的差异（如果未进行git add，一般无差异）
+
+git diff  HEAD （本地和提交） //显示本地代码与上次提交代码的区别
+
+git show //不加任何版本，显示最新的版本的具体修改内容
+
+
+查看某次提交修改的文件
+git show (commit)
+git show 提交的版本号
+
+
+git merge //合并分支及冲突处理
+git checkout -b slave
+在slava和master分支下，分别创建相同b.c（内容不同），都进行提交。
+切回master分支，执行git merge
+报冲突错误，cat b.c
+
+冲突内容，手动修改
+<<<<<<<<<<<<<<<
+master下的内容
+===============
+slave下内容
+>>>>>>>>>>>>>>>
+
+手动修改后，在master下再次执行git add 提交
+或者执行 git merge --abort退出合并
+
+
+git reset --mixed id //git的提交变了，但本地文件并没有改变 ，没add ，没提交
+git reset --soft  id  //git的提交变了，同时对于本地文件执行git add操作，没有提交
+git reset --hard  id  //git的提交变了，本地文件也改变，不可恢复
+
+git rm xx//删除某个xx文件，与git add操作类似
+
+
+git pull == git fetch//下载远程分支，Git merge //合并远程分支到本地分支
+
+git pull冲突：
+git stash //存储本地修改
+git pull//下载远程到本地
+git stash pop //本地修改还原，需手动修改冲突文件
+
+
+git checkout -b bb//新建分支bb
+git push origin bb//将本地bb分支推送到远程分支上
+推荐使用：
+git push --set-upstream origin bb//将本地bb分支推送到远程分支上,并将本地分支与远程分支关联
+
+在建立好本地分支与远程分支后，进行关联操作：
+git branch --set-upstream-to=origin/bb bb
+也可以将本地分支bb与远程的master或者其他分支关联，关联后可直接使用git pull/push
+
+
+git add xx
+git commit -am ""
+git push origin bb //与新建分支类似，需要指定push对象，若果本地与远程分支已关联，可直接使用git push/pull 操作
+
+git revert 撤销某次提交
+
+
+git建立本地仓库与github远程仓库联系：
+1.本地仓库建立
+	git init
+	git add .
+	git commit -m 'add files'
+2.github远程仓库建立
+3.建立本地仓库与远程仓库连接
+	git remote add origin +  //远程仓库地址
+4.更新远程仓库到本地仓库
+	git pull origin master --allow-unrelated-histories
+5.远程与本地不存在冲突后，提交
+	git push origin master
+
+
+
+
+
+
+
+
+
+
+
